@@ -103,6 +103,7 @@ create table `user`(
 	email varchar (255),
 	password varchar(255),
 	phone varchar (50),
+	avatar varchar (255),
 	id_role int,
 	
 	primary key(id)
