@@ -31,7 +31,8 @@ create table room(
 	name varchar(100),
 	price decimal(12, 2),
 	discount int,
-	date_update datetime,
+	create_date datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	update_date datetime,
 	id_size int,
 	id_type int,
 	
@@ -54,7 +55,6 @@ create table service(
 
 create table image(
 	id int auto_increment,
-	url varchar(255),
 	name varchar(50),
 	id_room int,
 	
@@ -103,7 +103,7 @@ create table `user`(
 	email varchar (255),
 	password varchar(255),
 	phone varchar (50),
-	avatar varchar (255),
+	avatar varchar (50),
 	id_role int,
 	
 	primary key(id)
@@ -123,8 +123,7 @@ create table blog (
 
 create table imageblog (
 	id int auto_increment,
-	name varchar(255),
-	url varchar(255),
+	name varchar(50),
 	id_blog int,
 	
 	primary key(id)
@@ -150,7 +149,7 @@ create table comment(
 	`like` int,
 	email varchar(50),
 	name varchar(50),
-	create_date datetime,
+	create_date datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	id_blog int,
 	
 	primary key(id)
