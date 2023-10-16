@@ -33,6 +33,8 @@ create table room(
 	discount int,
 	create_date datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	update_date datetime,
+	main_image varchar(100),
+	description text,
 	id_size int,
 	id_type int,
 	
