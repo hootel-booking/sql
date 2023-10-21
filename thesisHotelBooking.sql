@@ -156,7 +156,7 @@ create table comment(
 );
 
 create table `role`(
-	id int,
+	id int auto_increment,
 	name varchar (50),
 	
 	primary key (id)
