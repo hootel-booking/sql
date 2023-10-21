@@ -65,8 +65,6 @@ create table image(
 
 create table cart(
 	id int auto_increment,
-	check_in datetime,
-	check_out datetime,
 	is_delete bit,
 	id_room int,
 	id_user int,
