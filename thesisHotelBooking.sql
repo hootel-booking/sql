@@ -83,6 +83,8 @@ create table reservation(
 	id_user int,
 	id_status int,
 	id_room int,
+	note text,
+	create_date datetime DEFAULT CURRENT_TIMESTAMP,
 	
 	primary key (id)
 );
