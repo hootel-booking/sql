@@ -4,7 +4,7 @@ use thesisHotelBooking;
 create table review(
 	id int auto_increment,
 	content text,
-	rate int,
+	rate int DEFAULT 0,
 	name varchar(50),
 	email varchar(50),
 	id_room int,
@@ -21,7 +21,7 @@ create table `size`(
 	
 create table`type`(
 	id int auto_increment,
-	name varchar (50),
+	name varchar(50),
 	
 	primary key(id)
 );
@@ -29,11 +29,11 @@ create table`type`(
 create table room(
 	id int auto_increment,
 	name varchar(100),
-	price decimal(12, 2),
-	discount int,
-	create_date datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	price decimal(12, 2) DEFAULT 0,
+	discount int DEFAULT 0,
+	create_date datetime DEFAULT CURRENT_TIMESTAMP,
 	update_date datetime,
-	main_image varchar(100),
+	main_image varchar(255),
 	description text,
 	id_size int,
 	id_type int,
@@ -57,7 +57,7 @@ create table service(
 
 create table image(
 	id int auto_increment,
-	name varchar(50),
+	name varchar(255),
 	id_room int,
 	
 	primary key (id)
@@ -78,13 +78,16 @@ create table reservation(
 	check_out datetime,
 	adult_number int,
 	child_number int,
-	price decimal(12, 2),
-	discount int,
+	price decimal(12, 2) DEFAULT 0,
+	discount int DEFAULT 0,
 	id_user int,
 	id_status int,
 	id_room int,
+	update_by int,
+	deposit decimal(12, 2) DEFAULT 0,
 	note text,
 	create_date datetime DEFAULT CURRENT_TIMESTAMP,
+	update_date datetime,
 	
 	primary key (id)
 );
@@ -92,20 +95,20 @@ create table reservation(
 
 create table status (
 	id int auto_increment,
-	name varchar (50),
+	name varchar(50),
 	
 	primary key(id)
 );
 
 create table `user`(
 	id int auto_increment,
-	first_name varchar (255),
-	last_name varchar (255),
-	user_name varchar (255),
-	email varchar (255),
+	first_name varchar(255),
+	last_name varchar(255),
+	user_name varchar(255),
+	email varchar(255),
 	password varchar(255),
-	phone varchar (50),
-	avatar varchar (50),
+	phone varchar(50),
+	avatar varchar(255),
 	id_role int,
 	
 	primary key(id)
@@ -114,9 +117,8 @@ create table `user`(
 create table blog (
 	id int auto_increment,
 	title varchar(255),
-	create_date datetime,
-	url_main_image varchar(255),
-	name_main_image varchar(100),
+	create_date datetime DEFAULT CURRENT_TIMESTAMP,
+	name_main_image varchar(255),
 	content text,
 	id_user int,
 	
@@ -125,7 +127,7 @@ create table blog (
 
 create table imageblog (
 	id int auto_increment,
-	name varchar(50),
+	name varchar(255),
 	id_blog int,
 	
 	primary key(id)
@@ -148,10 +150,10 @@ create table tag(
 create table comment(
 	id int auto_increment,
 	content text,
-	`like` int,
+	`like` int DEFAULT 0,
 	email varchar(50),
 	name varchar(50),
-	create_date datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	create_date datetime DEFAULT CURRENT_TIMESTAMP,
 	id_blog int,
 	
 	primary key(id)
@@ -180,6 +182,7 @@ alter table cart add constraint fk_idUser_cart foreign key (id_user) references 
 alter table reservation add constraint fk_idRoom_reservation foreign key (id_room) references room(id);
 alter table reservation add constraint fk_idStatus_reservation foreign key (id_status) references status(id);
 alter table reservation add constraint fk_idUser_reservation foreign key (id_user) references `user`(id);
+alter table reservation add constraint fk_updateBy_reservation foreign key (update_by) references `user`(id);
 
 alter table blog add constraint fk_idUser_blog foreign key (id_user) references `user` (id);
 
