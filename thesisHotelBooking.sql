@@ -166,6 +166,18 @@ create table `role`(
 	primary key (id)
 );
 
+create table bank_account(
+	id_user int,
+	account_number varchar(50),
+	amount decimal(12, 2) DEFAULT 0,
+	transfer_amount decimal(12, 2) DEFAULT 0,
+	deposit_amount decimal(12, 2) DEFAULT 0,
+	transfer_date datetime,
+	deposit_date datetime,
+	
+	primary key (id_user)
+);
+
 alter table review add constraint fk_idRoom_review foreign key (id_room) references room(id);
 
 alter table room add constraint fk_idSize_size foreign key (id_size) references `size` (id);
@@ -194,3 +206,5 @@ alter table imageblog add constraint fk_idBlog_imageblog foreign key(id_blog) re
 alter table comment add constraint fk_idBlog_comment foreign key(id_blog) references blog(id);
 
 alter table `user` add constraint fk_idRole_user foreign key (id_role) references `role` (id);
+
+alter table bank_account add constraint fk_idUser_user foreign key (id_user) references `user`(id);
